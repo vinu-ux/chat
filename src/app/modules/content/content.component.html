@@ -1,0 +1,56 @@
+<div class="col-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Content</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="space-y">
+          <div>
+            <h4>Content Info</h4>
+          </div>
+          <div class="row row-cols-2 g-4">
+            <div>
+              <mat-form-field class="example-full-width w-100" appearance="outline">
+                <mat-label>Content Name</mat-label>
+                <input matInput placeholder="Content Name" formControlName="name" required />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="example-full-width w-100" appearance="outline">
+                <mat-label>Characters</mat-label>
+                <mat-select formControlName="characters" multiple>
+                  <mat-option *ngFor="let character of characters" [value]="character.id">
+                    {{ character.name }}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <mat-form-field class="example-full-width w-100" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Description" formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+
+
+
+
+
+          <div class="text-end">
+            <button type="button" class="btn btn-1" (click)="cancel()"> Cancel </button>
+            <button type="submit" class="btn btn-primary btn-2" [disabled]="form.invalid"> Save Changes </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="page-wrapper">
+  <!-- BEGIN PAGE HEADER -->
+  <div class="page-header px-4 d-print-none" aria-label="Page header">
+    <div class="container-fluid">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <!-- Page pre-title -->
+          <div class="page-pretitle">Overview</div>
+          <h2 class="page-title">Content</h2>
+        </div>
+        <!-- Page title actions -->
+        <div class="col-auto ms-auto d-print-none d-flex">
+          <div class="btn-list me-4">
+            <a class="btn btn-1" (click)="currentList = 'user-list'"> User List </a>
+            <a class="btn btn-1" (click)="currentList = 'content-list'"> Content List </a>
+
+          </div>
+          <div class="btn-list">
+            <span class="d-none d-sm-inline">
+              <a (click)="openUser()" class="btn btn-1"> New User </a>
+            </span>
+            <button type="button" class="btn btn-primary btn-5 d-none d-sm-inline-block" (click)="openContent()">
+              <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-2">
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+              Create new Content
+            </button>
+            <button type="button" class="btn btn-primary btn-6 d-sm-none btn-icon" aria-label="Create new report"
+              (click)="openContent()">
+              <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-2">
+                <path d="M12 5l0 14"></path>
+                <path d="M5 12l14 0"></path>
+              </svg>
+            </button>
+          </div>
+          <!-- BEGIN MODAL -->
+          <!-- END MODAL -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END PAGE HEADER -->
+  <!-- BEGIN PAGE BODY -->
+  <div class="page-body" *ngIf="currentList == 'user-list'" style="height: 85vh;overflow-y: auto;">
+    <div class="container-fluid px-4">
+      <div class="grid-cards">
+        <div class="custom-card" *ngFor="let u of userList">
+          <div class="card w-75">
+            <div class="d-flex justify-content-end pt-2 pe-2">
+              <button aria-label="Delete" class="delete-btn" (click)="onDelete(u)">
+                <i class="ti ti-trash"></i>
+              </button>
+            </div>
+
+
+            <div class="card-body text-center">
+              <div class="mb-3">
+                <span class="avatar avatar-xl" [style.background-image]="'url(' + getAvatarUrl(u) + ')'"> </span>
+              </div>
+              <div class="card-title mb-1">{{ u.name || u.shortname || 'Unnamed' }}</div>
+              <div class="text-secondary">{{ u.relation || u.gender || '' }}</div>
+            </div>
+            <a href="#" class="card-btn" (click)="openProfile(u); $event.preventDefault()">View full profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body" *ngIf="currentList == 'content-list'" style="height: 85vh;overflow-y: auto;">
+    <div class="container-fluid px-4">
+      <div class="grid-cards">
+        <div class="custom-card" *ngFor="let c of contentList" (click)="openChat(c)">
+          <div class="card row w-100 d-flex justify-content-between position-relative">
+            <div class="w-75 py-3">{{ c.name }}</div>
+
+            <div class="d-flex justify-content-end pt-2 pe-2 position-absolute">
+              <button aria-label="Delete" class="delete-btn1" (click)="$event.stopPropagation();onDeleteContent(c)">
+                <i class="ti ti-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
